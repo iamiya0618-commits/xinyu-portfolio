@@ -1,0 +1,168 @@
+export type Lang = 'en' | 'zh'
+
+export const translations = {
+  en: {
+    nav: {
+      work: 'Work',
+      about: 'About',
+      contact: 'Contact',
+    },
+    hero: {
+      greeting: "Hi, I'm",
+      name: 'Xinyu Zhang',
+      nameSub: '张馨予',
+      role: 'UI/UX Designer & Product Manager',
+      tagline: 'Crafting meaningful experiences at the intersection of design and technology.',
+      cta: 'View Work',
+    },
+    work: {
+      title: 'Selected Work',
+      viewCase: 'View Case Study →',
+      comingSoon: 'Coming Soon',
+    },
+    projects: [
+      {
+        title: 'AI Canvas',
+        category: 'UX Design',
+        description: 'Reimagining AI assistant interaction built on the Canvas paradigm — where conversation meets spatial thinking.',
+        year: '2024',
+        accent: '#7C3AED',
+        comingSoon: false,
+        slug: 'ai-canvas',
+      },
+      {
+        title: 'Mapmima',
+        category: 'Interaction Design',
+        description: 'Cross-scenario spatial interaction experience that bridges physical and digital environments seamlessly.',
+        year: '2024',
+        accent: '#06B6D4',
+        comingSoon: false,
+        slug: 'mapmima',
+      },
+      {
+        title: 'HungryHub',
+        category: 'Experience Design · Competition',
+        description: 'End-to-end UX design for a food discovery platform — crafted within a 3-week design sprint competition.',
+        year: '2024',
+        accent: '#F97316',
+        comingSoon: false,
+      },
+      {
+        title: 'Xiaohongshu',
+        category: 'Product Management',
+        description: 'Product strategy, feature definition, and data-driven iteration at one of China\'s largest lifestyle platforms.',
+        year: '2024',
+        accent: '#F43F5E',
+        comingSoon: false,
+      },
+      {
+        title: 'Ski App',
+        category: 'UX Design',
+        description: 'A companion app designed to elevate the on-mountain experience for skiers of all levels.',
+        year: '2025',
+        accent: '#0EA5E9',
+        comingSoon: true,
+      },
+    ],
+    about: {
+      title: 'About',
+      bio: "I'm a designer and product thinker who believes great experiences are born from deep empathy and strategic clarity. With a background spanning UI/UX design and product management, I bridge the gap between user needs and business goals — turning insights into interfaces that feel inevitable.",
+      skills: 'Skills & Tools',
+      skillsList: [
+        'Figma', 'Prototyping', 'User Research', 'Interaction Design',
+        'Product Strategy', 'Data Analysis', 'Usability Testing', 'Design Systems',
+      ],
+    },
+    contact: {
+      title: "Let's Connect",
+      tagline: 'Open to new opportunities and creative collaborations.',
+      emailLabel: 'Say Hello',
+      email: 'iamiya0618@gmail.com',
+    },
+    footer: {
+      copy: '© 2025 Xinyu Zhang. Designed & built with care.',
+    },
+  },
+  zh: {
+    nav: {
+      work: '作品',
+      about: '关于',
+      contact: '联系',
+    },
+    hero: {
+      greeting: '你好，我是',
+      name: '张馨予',
+      nameSub: 'Xinyu Zhang',
+      role: 'UI/UX 设计师 & 产品经理',
+      tagline: '在设计与技术的交汇处，创造有意义的用户体验。',
+      cta: '查看作品',
+    },
+    work: {
+      title: '精选作品',
+      viewCase: '查看案例 →',
+      comingSoon: '即将上线',
+    },
+    projects: [
+      {
+        title: 'AI Canvas',
+        category: 'UX 设计',
+        description: '基于 Canvas 范式重新构想 AI 助手交互体验——让对话遇见空间化思维，探索人机交互的新边界。',
+        year: '2024',
+        accent: '#7C3AED',
+        comingSoon: false,
+        slug: 'ai-canvas',
+      },
+      {
+        title: 'Mapmima',
+        category: '交互设计',
+        description: '跨情景的空间交互体验设计，无缝连接物理与数字环境之间的边界。',
+        year: '2024',
+        accent: '#06B6D4',
+        comingSoon: false,
+        slug: 'mapmima',
+      },
+      {
+        title: 'HungryHub',
+        category: '体验设计 · 竞赛项目',
+        description: '三周设计冲刺，完成美食发现平台从零到一的全流程 UX 设计，覆盖研究、原型到测试。',
+        year: '2024',
+        accent: '#F97316',
+        comingSoon: false,
+      },
+      {
+        title: '小红书',
+        category: '产品管理',
+        description: '在中国最大的生活方式平台之一，负责产品策略规划、功能定义与数据驱动的产品迭代。',
+        year: '2024',
+        accent: '#F43F5E',
+        comingSoon: false,
+      },
+      {
+        title: '滑雪 App',
+        category: 'UX 设计',
+        description: '专为不同水平滑雪爱好者打造的雪山伴侣 App，致力于提升每一次山上的体验。',
+        year: '2025',
+        accent: '#0EA5E9',
+        comingSoon: true,
+      },
+    ],
+    about: {
+      title: '关于我',
+      bio: '我是一名设计师，也是产品思考者。我相信优秀的体验源于深度共情与清晰的策略思维。凭借 UI/UX 设计与产品管理的跨界背景，我致力于连接用户需求与商业目标——将洞察转化为那些让人感觉理所当然的界面。',
+      skills: '技能 & 工具',
+      skillsList: [
+        'Figma', '原型设计', '用户研究', '交互设计',
+        '产品策略', '数据分析', '可用性测试', '设计系统',
+      ],
+    },
+    contact: {
+      title: '欢迎联系我',
+      tagline: '期待新的机会与创意合作。',
+      emailLabel: '发邮件',
+      email: 'iamiya0618@gmail.com',
+    },
+    footer: {
+      copy: '© 2025 张馨予. 用心设计与构建。',
+    },
+  },
+}
