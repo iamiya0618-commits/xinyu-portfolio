@@ -3,7 +3,7 @@
 import { useLang } from '@/lib/LangContext'
 
 export default function About() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
 
   return (
     <section id="about" className="py-28 bg-gray-900">
@@ -15,8 +15,11 @@ export default function About() {
               {t.about.title}
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              Design &<br />
-              <span className="gradient-text">Strategy.</span>
+              {lang === 'en' ? (
+                <>Design, Strategy<br />&amp; <span className="gradient-text">Media.</span></>
+              ) : (
+                <>设计 · 策略<br /><span className="gradient-text">与传媒。</span></>
+              )}
             </h2>
             <p className="text-gray-400 leading-relaxed text-lg">
               {t.about.bio}

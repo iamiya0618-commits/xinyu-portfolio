@@ -6,9 +6,6 @@ import ProjectCard from './ProjectCard'
 export default function Projects() {
   const { t } = useLang()
 
-  const mainProjects = t.projects.slice(0, 4)
-  const comingSoon = t.projects[4]
-
   return (
     <section id="work" className="py-28 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
@@ -22,19 +19,12 @@ export default function Projects() {
           </h2>
         </div>
 
-        {/* 2x2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {mainProjects.map((project, i) => (
+        {/* Uniform 2×2 grid for all projects */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {t.projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
-
-        {/* Coming soon - full width */}
-        {comingSoon && (
-          <div className="grid grid-cols-1">
-            <ProjectCard project={comingSoon} index={4} />
-          </div>
-        )}
       </div>
     </section>
   )

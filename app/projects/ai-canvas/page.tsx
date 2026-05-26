@@ -295,6 +295,143 @@ export default function AICanvasPage() {
         </div>
       </section>
 
+      {/* ── Design Validation ── */}
+      <section className="py-28" style={{ background: '#faf9f7' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionLabel color={CORAL}>
+            {lang === 'en' ? 'Design Validation' : '设计验证'}
+          </SectionLabel>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-5 mb-5 max-w-3xl leading-tight">
+            {lang === 'en'
+              ? 'Three features we designed — later shipped by Canvas.'
+              : '我们设计的三个功能，后来被 Canvas 官方独立发布。'}
+          </h2>
+          <p className="text-gray-500 leading-relaxed text-lg max-w-3xl mb-16">
+            {lang === 'en'
+              ? "After completing this project in November 2025, we discovered that Canvas's own development team independently shipped three features that directly mirror our proposed solutions — validating that our user research accurately identified genuine, high-priority product gaps ahead of the platform's own roadmap."
+              : '2025年11月我们完成项目后，发现 Canvas 官方开发团队独立上线了三个与我们方案高度吻合的功能——证明我们的用研准确识别出了平台自身开发路径上的真实需求，且领先于官方发布。'}
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1: AI Search */}
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-2 flex-wrap">
+                <p className="text-sm font-black text-gray-900">
+                  {lang === 'en' ? 'AI Course Search' : 'AI 课程内搜索'}
+                </p>
+                <span className="text-xs font-bold px-3 py-1 rounded-full text-white shrink-0" style={{ background: CORAL }}>
+                  {lang === 'en' ? 'Canvas: Dec 2025' : 'Canvas: 2025年12月'}
+                </span>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 mb-2">
+                  {lang === 'en' ? 'Our Design' : '我们的设计'}
+                </p>
+                <div className="h-52 rounded-2xl border-2 border-dashed border-gray-200 bg-white flex flex-col items-center justify-center gap-2">
+                  <div className="w-8 h-8 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                    <span className="text-gray-300 text-lg">+</span>
+                  </div>
+                  <p className="text-xs text-gray-400 text-center px-6 leading-relaxed">
+                    {lang === 'en' ? 'Figma prototype coming soon' : 'Figma 原型图即将添加'}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase mb-2" style={{ color: CORAL }}>
+                  {lang === 'en' ? 'Canvas Official' : 'Canvas 官方'}
+                </p>
+                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                  <img src="/projects/ai-canvas/canvas-ai-search.png" alt="Canvas IgniteAI Search for Courses" className="w-full" />
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 2: Video Transcription */}
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-2 flex-wrap">
+                <p className="text-sm font-black text-gray-900">
+                  {lang === 'en' ? 'Video Transcription' : '视频文字转录'}
+                </p>
+                <span className="text-xs font-bold px-3 py-1 rounded-full text-white shrink-0" style={{ background: CORAL }}>
+                  {lang === 'en' ? 'Canvas: Apr 2026' : 'Canvas: 2026年4月'}
+                </span>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 mb-2">
+                  {lang === 'en' ? 'Our Design' : '我们的设计'}
+                </p>
+                <div className="h-52 rounded-2xl border-2 border-dashed border-gray-200 bg-white flex flex-col items-center justify-center gap-2">
+                  <div className="w-8 h-8 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                    <span className="text-gray-300 text-lg">+</span>
+                  </div>
+                  <p className="text-xs text-gray-400 text-center px-6 leading-relaxed">
+                    {lang === 'en' ? 'Figma prototype coming soon' : 'Figma 原型图即将添加'}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase mb-2" style={{ color: CORAL }}>
+                  {lang === 'en' ? 'Canvas Official' : 'Canvas 官方'}
+                </p>
+                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                  <img src="/projects/ai-canvas/canvas-transcript.png" alt="Canvas Rolling Transcripts" className="w-full" />
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 3: Chapter Markers */}
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-2 flex-wrap">
+                <p className="text-sm font-black text-gray-900">
+                  {lang === 'en' ? 'Video Chapter Markers' : '视频章节标记'}
+                </p>
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-500 shrink-0">
+                  {lang === 'en' ? 'Canvas: not yet released' : 'Canvas: 尚未发布'}
+                </span>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400 mb-2">
+                  {lang === 'en' ? 'Our Design' : '我们的设计'}
+                </p>
+                <div className="h-52 rounded-2xl border-2 border-dashed border-gray-200 bg-white flex flex-col items-center justify-center gap-2">
+                  <div className="w-8 h-8 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
+                    <span className="text-gray-300 text-lg">+</span>
+                  </div>
+                  <p className="text-xs text-gray-400 text-center px-6 leading-relaxed">
+                    {lang === 'en' ? 'Figma prototype coming soon' : 'Figma 原型图即将添加'}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase mb-2 text-gray-400">
+                  {lang === 'en' ? 'Canvas Community Request' : 'Canvas 社区需求帖'}
+                </p>
+                <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                  <img src="/projects/ai-canvas/canvas-chapters.png" alt="Canvas Chapter Markers Community Feature Request" className="w-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline note */}
+          <div className="mt-12 p-7 rounded-2xl border border-gray-200 bg-white flex gap-5 items-start">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ background: CORAL + '18' }}>
+              <div className="w-2 h-2 rounded-full" style={{ background: CORAL }} />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-gray-900 mb-1.5">
+                {lang === 'en' ? 'Timeline note' : '时间线说明'}
+              </p>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                {lang === 'en'
+                  ? 'The chapter marker feature (Feature 3) remains an open user request on the Canvas Community forum as of May 2026 — our design still precedes Canvas\'s own implementation. Features 1 and 2 were released by Canvas 1–5 months after our project concluded.'
+                  : '视频章节标记功能（功能三）截至2026年5月仍以用户需求帖形式存在于 Canvas 社区，尚未被官方开发，我们的设计至今仍领先于官方实现。功能一与功能二分别于我们项目结束后的1至5个月内由 Canvas 官方发布。'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Reflection ── */}
       <section className="py-28 relative overflow-hidden" style={{ background: CORAL }}>
         <div className="absolute right-0 bottom-0 text-[20rem] font-black leading-none select-none pointer-events-none opacity-[0.08] text-white">→</div>

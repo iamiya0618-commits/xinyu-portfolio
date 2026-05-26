@@ -6,13 +6,14 @@ export const translations = {
       work: 'Work',
       about: 'About',
       contact: 'Contact',
+      cv: 'CV',
     },
     hero: {
       greeting: "Hi, I'm",
       name: 'Xinyu Zhang',
       nameSub: '张馨予',
-      role: 'UI/UX Designer & Product Manager',
-      tagline: 'Crafting meaningful experiences at the intersection of design and technology.',
+      role: 'UX Designer · Product Manager · Media & Comms',
+      tagline: 'Designing at the intersection of technology, strategy, and communication.',
       cta: 'View Work',
     },
     work: {
@@ -38,6 +39,15 @@ export const translations = {
         accent: '#06B6D4',
         comingSoon: false,
         slug: 'mapmima',
+      },
+      {
+        title: 'Starbucks Echo',
+        category: 'AI Product Strategy · Service Design',
+        description: 'A 3-layer AI ambient intelligence proposal that reimagines Starbucks as an emotionally responsive "third place" — bridging the efficiency paradox of the digital age.',
+        year: '2025',
+        accent: '#00704A',
+        comingSoon: false,
+        slug: 'starbucks-echo',
       },
       {
         title: 'HungryHub',
@@ -66,7 +76,7 @@ export const translations = {
     ],
     about: {
       title: 'About',
-      bio: "I'm a designer and product thinker who believes great experiences are born from deep empathy and strategic clarity. With a background spanning UI/UX design and product management, I bridge the gap between user needs and business goals — turning insights into interfaces that feel inevitable.",
+      bio: "I'm a designer, product thinker, and media practitioner who believes great experiences are born from deep empathy and strategic clarity. With a background spanning UI/UX design, product management, and broadcasting & media production, I bridge the gap between user needs and business goals — and bring a storyteller's instinct for how messages land.",
       skills: 'Skills & Tools',
       skillsList: [
         'Figma', 'Prototyping', 'User Research', 'Interaction Design',
@@ -77,7 +87,7 @@ export const translations = {
       title: "Let's Connect",
       tagline: 'Open to new opportunities and creative collaborations.',
       emailLabel: 'Say Hello',
-      email: 'iamiya0618@gmail.com',
+      email: 'iamiya0187@163.com',
     },
     footer: {
       copy: '© 2025 Xinyu Zhang. Designed & built with care.',
@@ -88,13 +98,14 @@ export const translations = {
       work: '作品',
       about: '关于',
       contact: '联系',
+      cv: '简历',
     },
     hero: {
       greeting: '你好，我是',
       name: '张馨予',
       nameSub: 'Xinyu Zhang',
-      role: 'UI/UX 设计师 & 产品经理',
-      tagline: '在设计与技术的交汇处，创造有意义的用户体验。',
+      role: 'UX 设计师 · 产品经理 · 传媒 & 运营',
+      tagline: '在技术、策略与传播的交汇处，创造有意义的体验。',
       cta: '查看作品',
     },
     work: {
@@ -120,6 +131,15 @@ export const translations = {
         accent: '#06B6D4',
         comingSoon: false,
         slug: 'mapmima',
+      },
+      {
+        title: 'Starbucks Echo',
+        category: 'AI 产品策略 · 服务设计',
+        description: '三层 AI 环境感知系统提案——将星巴克重塑为具有情感感知能力的"第三空间"，弥合数字化效率与人文关怀之间的裂缝。',
+        year: '2025',
+        accent: '#00704A',
+        comingSoon: false,
+        slug: 'starbucks-echo',
       },
       {
         title: 'HungryHub',
@@ -148,7 +168,7 @@ export const translations = {
     ],
     about: {
       title: '关于我',
-      bio: '我是一名设计师，也是产品思考者。我相信优秀的体验源于深度共情与清晰的策略思维。凭借 UI/UX 设计与产品管理的跨界背景，我致力于连接用户需求与商业目标——将洞察转化为那些让人感觉理所当然的界面。',
+      bio: '我是设计师、产品思考者，也是传媒从业者。我相信优秀的体验源于深度共情与清晰的策略思维。凭借 UI/UX 设计、产品管理与播音传媒的跨界背景，我致力于连接用户需求与商业目标——并带着讲故事的直觉，感知信息如何真正触达受众。',
       skills: '技能 & 工具',
       skillsList: [
         'Figma', '原型设计', '用户研究', '交互设计',
@@ -159,7 +179,7 @@ export const translations = {
       title: '欢迎联系我',
       tagline: '期待新的机会与创意合作。',
       emailLabel: '发邮件',
-      email: 'iamiya0618@gmail.com',
+      email: 'iamiya0187@163.com',
     },
     footer: {
       copy: '© 2025 张馨予. 用心设计与构建。',

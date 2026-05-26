@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useLang } from '@/lib/LangContext'
 
 export default function Navbar() {
@@ -42,6 +43,12 @@ export default function Navbar() {
                 {t.nav[key]}
               </button>
             ))}
+            <Link
+              href="/cv"
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {t.nav.cv}
+            </Link>
           </div>
 
           <button
