@@ -17,31 +17,133 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #0a0a0a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #7c3aed 0%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ── Experimental Graphic Fonts ── */
+.font-flex {
+  font-family: "Roboto Flex", sans-serif;
+  line-height: 0.92;
+}
+
+.font-noto {
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+.lab {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* CV page — tighter letter-spacing for dense content */
+.cv-wrap .lab {
+  letter-spacing: 0.01em;
+}
+
+/* ── Variable font width presets ── */
+.ultra-wide { font-variation-settings: "wght" 900, "wdth" 151; }
+.wide       { font-variation-settings: "wght" 800, "wdth" 140; }
+.narrow-vf  { font-variation-settings: "wght" 700, "wdth" 50; }
+.thin-wide  { font-variation-settings: "wght" 300, "wdth" 140; }
+
+/* ── Warp transforms ── */
+.skew-i  { display: inline-block; transform: skewX(-13deg) scaleX(1.18); transform-origin: left; }
+.squish  { display: inline-block; transform: scaleX(0.62); transform-origin: left; }
+.do-stretch { display: inline-block; transform: scaleX(1.7); transform-origin: left; }
+
+/* ── Art card gradient fills ── */
+.art-blue {
+  background:
+    radial-gradient(120% 80% at 30% 20%, #6ea8ff 0%, #1c4dff 45%, #0a1f8f 100%);
+  position: relative;
+}
+.art-blue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.5) 0 2px, transparent 2px 16px),
+    repeating-linear-gradient(60deg, rgba(180,210,255,0.5) 0 2px, transparent 2px 22px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.art-orange {
+  background:
+    radial-gradient(40% 40% at 30% 30%, #ffd84d 0%, #ff8a00 55%, transparent 60%),
+    radial-gradient(50% 50% at 70% 60%, #ff5e3a 0%, #ff8a00 50%, transparent 70%),
+    radial-gradient(45% 45% at 50% 85%, #ffb347 0%, transparent 65%),
+    linear-gradient(160deg, #fff4d6, #ffd0a0);
+}
+
+.art-green {
+  background: linear-gradient(180deg, #0fae6e 0%, #1d8f63 40%, #6fae3e 70%, #d9c64a 100%);
+  position: relative;
+}
+.art-green::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 30% at 50% 30%, rgba(255,255,255,0.55), transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.art-pink {
+  background:
+    radial-gradient(60% 60% at 40% 40%, #ff4dd9 0%, transparent 60%),
+    linear-gradient(135deg, #ff2e8b 0%, #ff5ea8 45%, #00e0c0 100%);
+  position: relative;
+}
+.art-pink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at 60% 45%, rgba(0,0,0,0.18) 0 2px, transparent 2px 9px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.art-purple {
+  background:
+    radial-gradient(55% 55% at 60% 35%, #c98cff 0%, transparent 60%),
+    linear-gradient(150deg, #7b2eff 0%, #b14bff 50%, #ff5ea8 100%);
+  position: relative;
+}
+
+/* ── Fan card hover ── */
+.fan-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.fan-card:hover {
+  transform: rotate(var(--rot)) translateY(-10px) !important;
+  box-shadow: 0 22px 52px rgba(0,0,0,0.32) !important;
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-in-up {
-  opacity: 0;
-  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* ── Greeting-card page transition ── */
+.card-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  transform-origin: left center;
+  transform: perspective(1400px) rotateY(0deg);
+}
+
+.card-cover-open {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  transform-origin: left center;
+  transform: perspective(1400px) rotateY(-90deg);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }

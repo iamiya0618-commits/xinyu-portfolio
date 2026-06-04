@@ -1,67 +1,92 @@
 'use client'
 
+import { useRef, useEffect } from 'react'
 import { useLang } from '@/lib/LangContext'
 
-export default function Hero() {
-  const { t } = useLang()
+function FitLine({ text, className }: { text: string; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isCJK = /[一-鿿]/.test(text)
 
-  const scrollToWork = () => {
-    document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const fit = () => {
+      const parent = el.parentElement
+      if (!parent) return
+      el.style.fontSize = '100px'
+      const textW = el.scrollWidth
+      const parentW = parent.clientWidth
+      if (textW > 0) {
+        el.style.fontSize = Math.floor((parentW / textW) * 100 * 0.99) + 'px'
+      }
+    }
+
+    const run = () => {
+      fit()
+      if (document.fonts) document.fonts.ready.then(fit)
+    }
+
+    run()
+    const observer = new ResizeObserver(run)
+    if (el.parentElement) observer.observe(el.parentElement)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white"
+    <div
+      ref={ref}
+      className={`whitespace-nowrap ${className ?? 'font-flex ultra-wide'}`}
+      style={{ lineHeight: isCJK ? 1 : 0.88, fontSize: '100px' }}
     >
-      {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-100 rounded-full blur-3xl opacity-40 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-100 rounded-full blur-3xl opacity-30 translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+      {text}
+    </div>
+  )
+}
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-16">
-        {/* Greeting + role */}
-        <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-6">
-            {t.hero.greeting}
-          </p>
-        </div>
+export default function Hero() {
+  const { lang } = useLang()
 
-        {/* Name */}
-        <div className="animate-fade-in-up" style={{ animationDelay: '80ms' }}>
-          <h1 className="text-[clamp(3rem,10vw,7rem)] font-bold leading-none tracking-tight text-gray-900 mb-8">
-            {t.hero.name}
-          </h1>
-        </div>
+  return (
+    <section id="hero" className="h-screen flex flex-col bg-white overflow-x-hidden">
 
-        {/* Divider */}
-        <div className="animate-fade-in-up" style={{ animationDelay: '160ms' }}>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-violet-600 to-orange-500 mb-8" />
-        </div>
+      {/* Spacer — pushes name to the lower half of the screen */}
+      <div className="flex-1 min-h-0" />
 
-        {/* Role + tagline */}
-        <div className="animate-fade-in-up max-w-xl" style={{ animationDelay: '240ms' }}>
-          <p className="text-lg font-medium text-gray-800 mb-3">{t.hero.role}</p>
-          <p className="text-gray-500 leading-relaxed">{t.hero.tagline}</p>
-        </div>
-
-        {/* CTA */}
-        <div className="animate-fade-in-up mt-12" style={{ animationDelay: '320ms' }}>
-          <button
-            onClick={scrollToWork}
-            className="group inline-flex items-center gap-3 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-violet-600 transition-all duration-300"
-          >
-            {t.hero.cta}
-            <span className="group-hover:translate-x-1 transition-transform">↓</span>
-          </button>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="animate-fade-in-up absolute bottom-10 left-1/2 -translate-x-1/2" style={{ animationDelay: '600ms' }}>
-          <div className="flex flex-col items-center gap-1 opacity-30">
-            <div className="w-px h-12 bg-gray-900 animate-pulse" />
-          </div>
-        </div>
+      {/* Full-width name */}
+      <div className="px-[40px] lg:px-[70px]">
+        <p className="lab mb-3" style={{ fontSize: '11px', opacity: 0.35 }}>Portfolio</p>
+        {lang === 'en' ? (
+          <>
+            <FitLine text="XINYU" />
+            <FitLine text="ZHANG" />
+          </>
+        ) : (
+          <FitLine text="张馨予" className="font-noto font-bold" />
+        )}
       </div>
+
+      {/* Role + tagline row */}
+      <div
+        className="px-[40px] lg:px-[70px] flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-[60px] mt-6 pb-10"
+      >
+        <div className="lab shrink-0" style={{ fontSize: '13px', lineHeight: 1.65 }}>
+          {lang === 'en' ? (
+            <>UX Designer<br />Product Manager<br />Open to work</>
+          ) : (
+            <>UX 设计师<br />产品经理<br />求职中</>
+          )}
+        </div>
+        <p
+          className="font-noto m-0"
+          style={{ fontSize: '16px', lineHeight: 1.75, color: '#444', maxWidth: '460px' }}
+        >
+          {lang === 'en'
+            ? 'Designing at the intersection of technology, strategy, and human communication.'
+            : '在技术、策略与人的传播之间，做出有意义的设计。'}
+        </p>
+      </div>
+
     </section>
   )
 }

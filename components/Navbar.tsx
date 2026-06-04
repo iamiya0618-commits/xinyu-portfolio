@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useLang } from '@/lib/LangContext'
 
 export default function Navbar() {
-  const { lang, setLang, t } = useLang()
+  const { lang, setLang } = useLang()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -21,42 +21,44 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+        scrolled ? 'bg-white/95 backdrop-blur-md border-b border-black/10' : 'bg-white'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <button
-          onClick={() => scrollTo('hero')}
-          className="font-semibold text-sm tracking-wide text-gray-900 hover:opacity-60 transition-opacity"
-        >
-          Xinyu Zhang
-        </button>
+      <div className="max-w-[1440px] mx-auto px-[40px] lg:px-[70px] py-[18px] flex items-start justify-between">
+        {/* Left: identity */}
+        <div className="lab leading-[1.7] text-[12px] lg:text-[14px]">
+          张馨予 — Xinyu Zhang<br />
+          <span className="hidden sm:inline">Interaction &amp; Product Design</span>
+        </div>
 
-        <div className="flex items-center gap-8">
-          <div className="hidden sm:flex items-center gap-6">
-            {(['work', 'about', 'contact'] as const).map((key) => (
-              <button
-                key={key}
-                onClick={() => scrollTo(key)}
-                className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                {t.nav[key]}
-              </button>
-            ))}
-            <Link
-              href="/cv"
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-            >
-              {t.nav.cv}
+        {/* Center: portfolio mark */}
+        <div className="lab text-center leading-[1.7] text-[12px] lg:text-[14px] hidden md:block">
+          Portfolio<br />©2026
+        </div>
+
+        {/* Right: nav links + lang toggle */}
+        <div className="lab text-right leading-[1.7] text-[12px] lg:text-[14px]">
+          <div className="flex items-center gap-4 justify-end">
+            <button onClick={() => scrollTo('work')} className="hover:opacity-50 transition-opacity hidden sm:block">
+              Work
+            </button>
+            <button onClick={() => scrollTo('about')} className="hover:opacity-50 transition-opacity hidden sm:block">
+              About
+            </button>
+            <button onClick={() => scrollTo('contact')} className="hover:opacity-50 transition-opacity hidden sm:block">
+              Contact
+            </button>
+            <Link href="/cv" className="hover:opacity-50 transition-opacity hidden sm:block">
+              Résumé
             </Link>
+            <button
+              onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+              className="hover:opacity-50 transition-opacity border border-black px-2 py-0.5"
+            >
+              {lang === 'en' ? '中文' : 'EN'}
+            </button>
           </div>
-
-          <button
-            onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-            className="text-xs font-medium px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-violet-400 hover:text-violet-600 transition-all"
-          >
-            {lang === 'en' ? '中文' : 'EN'}
-          </button>
+          <div className="mt-1 hidden lg:block opacity-50">Sydney · Open to work</div>
         </div>
       </div>
     </nav>
