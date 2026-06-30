@@ -1,11 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { usePageTransition } from '@/lib/TransitionContext'
 
 type FanCard = {
   name: string
   discipline: string
+  year: string
+  summary: string
   artClass: string
   textColor: string
   left: number
@@ -20,6 +23,8 @@ const cards: FanCard[] = [
   {
     name: 'AI Canvas',
     discipline: 'UX / UI',
+    year: '2024',
+    summary: 'An AI-assisted learning system that lowers language anxiety and helps international students participate with confidence.',
     artClass: 'art-blue',
     textColor: '#fff',
     left: 70,
@@ -32,6 +37,8 @@ const cards: FanCard[] = [
   {
     name: 'Mapmima',
     discipline: 'Interaction Design',
+    year: '2024',
+    summary: 'A cross-media care ecosystem for mothers, connecting spatial installations with a companion app.',
     artClass: 'art-purple',
     textColor: '#fff',
     left: 250,
@@ -44,6 +51,8 @@ const cards: FanCard[] = [
   {
     name: 'Starbucks Echo',
     discipline: 'AI · Product Strategy',
+    year: '2025',
+    summary: 'A strategic service proposal that uses ambient AI, AR memory, and community loyalty to restore the third place.',
     artClass: 'art-green',
     textColor: '#fff',
     left: 470,
@@ -56,6 +65,8 @@ const cards: FanCard[] = [
   {
     name: 'HungryHub',
     discipline: 'Experience Design',
+    year: '2024',
+    summary: 'A food discovery experience created through a focused design sprint, from research to prototype testing.',
     artClass: 'art-orange',
     textColor: '#0a0a0a',
     left: 690,
@@ -68,6 +79,8 @@ const cards: FanCard[] = [
   {
     name: 'Xiaohongshu',
     discipline: 'PM Case Study',
+    year: '2024',
+    summary: 'A product management case study around lifestyle-platform strategy, feature definition, and iteration.',
     artClass: 'art-pink',
     textColor: '#0a0a0a',
     left: 910,
@@ -82,6 +95,13 @@ const cards: FanCard[] = [
 export default function Projects() {
   const [hovered, setHovered] = useState<string | null>(null)
   const { trigger } = usePageTransition()
+  const router = useRouter()
+
+  useEffect(() => {
+    cards.forEach((card) => {
+      if (card.slug) router.prefetch(`/projects/${card.slug}`)
+    })
+  }, [router])
 
   const handleClick = (c: FanCard) => {
     if (!c.slug) return
@@ -104,50 +124,16 @@ export default function Projects() {
         {/* ── Fan layout — desktop ── */}
         <div
           className="relative hidden lg:block"
-          style={{ height: '490px', marginTop: '34px' }}
+          style={{ height: '560px', marginTop: '34px' }}
+          onMouseLeave={() => setHovered(null)}
         >
           {cards.map((c) => {
             const isHovered = hovered === c.name
-            const cardEl = (
-              <div
-                className={`${c.artClass} overflow-hidden relative`}
-                style={{
-                  width: 232,
-                  height: 332,
-                  transform: `rotate(${c.rotation}deg) scale(${isHovered ? 1.1 : 1})`,
-                  boxShadow: isHovered
-                    ? '0 28px 64px rgba(0,0,0,0.38)'
-                    : '0 8px 22px rgba(0,0,0,0.22)',
-                  transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease',
-                  cursor: c.slug ? 'pointer' : 'default',
-                }}
-              >
-                <div className="absolute left-[14px] bottom-[12px]">
-                  <span
-                    className="lab block"
-                    style={{
-                      color: c.textColor,
-                      fontSize: '13px',
-                      mixBlendMode: c.textColor === '#fff' ? 'difference' : 'normal',
-                    }}
-                  >
-                    {c.name}
-                  </span>
-                  <span
-                    className="lab block"
-                    style={{
-                      color: c.textColor,
-                      fontSize: '10px',
-                      opacity: 0.7,
-                      marginTop: '3px',
-                      mixBlendMode: c.textColor === '#fff' ? 'difference' : 'normal',
-                    }}
-                  >
-                    {c.discipline}
-                  </span>
-                </div>
-              </div>
-            )
+            const hasHover = hovered !== null
+            const isDimmed = hasHover && !isHovered
+            const detailOnLeft = c.left > 620
+            const detailX = detailOnLeft ? -338 : 248
+            const hoverLift = detailOnLeft ? -130 : -80
 
             return (
               <div
@@ -157,14 +143,102 @@ export default function Projects() {
                   left: c.left,
                   top: c.top,
                   zIndex: isHovered ? 20 : c.zIndex,
-                  width: 232,
-                  height: 332,
+                  width: 620,
+                  height: 430,
+                  transform: isHovered ? `translateX(${hoverLift}px)` : 'translateX(0)',
+                  opacity: isDimmed ? 0 : 1,
+                  pointerEvents: isDimmed ? 'none' : 'auto',
+                  transition:
+                    'opacity 0.28s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1)',
                 }}
                 onMouseEnter={() => setHovered(c.name)}
-                onMouseLeave={() => setHovered(null)}
                 onClick={() => handleClick(c)}
               >
-                {cardEl}
+                <div
+                  className="absolute top-0"
+                  style={{
+                    left: detailOnLeft ? 0 : detailX,
+                    width: 320,
+                    height: 332,
+                    transform: isHovered
+                      ? 'translateX(0) rotate(0deg)'
+                      : `translateX(${detailOnLeft ? 96 : -96}px) rotate(${detailOnLeft ? 4 : -4}deg)`,
+                    opacity: isHovered ? 1 : 0,
+                    transition:
+                      'opacity 0.22s ease, transform 0.58s cubic-bezier(0.22,1,0.36,1)',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <div className="h-full border-2 border-[#0a0a0a] bg-white px-7 py-6 shadow-[10px_10px_0_#0a0a0a]">
+                    <div className="lab flex items-center justify-between text-[10px] text-gray-400">
+                      <span>{c.year}</span>
+                      <span>{c.slug ? 'Case Study' : 'Coming Soon'}</span>
+                    </div>
+                    <h3 className="mt-12 text-3xl font-semibold leading-none text-[#0a0a0a]">
+                      {c.name}
+                    </h3>
+                    <p className="lab mt-3 text-[11px]" style={{ color: c.transitionColor }}>
+                      {c.discipline}
+                    </p>
+                    <p className="mt-7 text-[15px] leading-6 text-gray-600">
+                      {c.summary}
+                    </p>
+                    <p className="lab absolute bottom-6 left-7 text-[11px] text-[#0a0a0a]">
+                      {c.slug ? 'Click to open' : 'Details soon'}
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className={`${c.artClass} absolute top-0 overflow-hidden`}
+                  style={{
+                    left: detailOnLeft ? 336 : 0,
+                    width: isHovered ? 268 : 232,
+                    height: isHovered ? 382 : 332,
+                    transform: `rotate(${isHovered ? 0 : c.rotation}deg) scale(${isHovered ? 1.06 : 1})`,
+                    boxShadow: isHovered
+                      ? '0 30px 70px rgba(0,0,0,0.34)'
+                      : '0 8px 22px rgba(0,0,0,0.22)',
+                    transition:
+                      'left 0.55s cubic-bezier(0.22,1,0.36,1), width 0.55s cubic-bezier(0.22,1,0.36,1), height 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease',
+                    cursor: c.slug ? 'pointer' : 'default',
+                    zIndex: 2,
+                  }}
+                >
+                  <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 pt-5">
+                    <span className="lab text-[11px]" style={{ color: c.textColor, opacity: 0.82 }}>
+                      {c.year}
+                    </span>
+                    <span className="lab text-[11px]" style={{ color: c.textColor, opacity: 0.82 }}>
+                      0{c.zIndex}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <span
+                      className="block font-flex ultra-wide leading-[0.88]"
+                      style={{
+                        color: c.textColor,
+                        fontSize: isHovered ? '48px' : '34px',
+                        mixBlendMode: c.textColor === '#fff' ? 'difference' : 'normal',
+                        transition: 'font-size 0.35s ease',
+                      }}
+                    >
+                      {c.name}
+                    </span>
+                    <span
+                      className="lab mt-4 block"
+                      style={{
+                        color: c.textColor,
+                        fontSize: '11px',
+                        opacity: 0.72,
+                        mixBlendMode: c.textColor === '#fff' ? 'difference' : 'normal',
+                      }}
+                    >
+                      {c.discipline}
+                    </span>
+                  </div>
+                </div>
               </div>
             )
           })}
@@ -188,7 +262,7 @@ export default function Projects() {
                 style={{ width: 180, height: 260, boxShadow: '0 6px 16px rgba(0,0,0,0.2)' }}
               >
                 <div className="absolute left-3 bottom-3">
-                  <span className="lab block text-[12px]" style={{ color: c.textColor }}>
+                  <span className="font-flex ultra-wide block text-[28px] leading-none" style={{ color: c.textColor }}>
                     {c.name}
                   </span>
                   <span className="lab block" style={{ color: c.textColor, fontSize: '9px', opacity: 0.7, marginTop: '2px' }}>

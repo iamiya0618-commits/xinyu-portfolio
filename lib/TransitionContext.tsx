@@ -20,6 +20,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
 
   const trigger = useCallback((href: string, cardColor: string) => {
     clear()
+    router.prefetch(href)
     setColor(cardColor)
     setOpening(false)
     setVisible(true)
@@ -31,11 +32,11 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
       })
     })
 
-    const t1 = setTimeout(() => router.push(href), 280)
+    const t1 = setTimeout(() => router.push(href), 150)
     const t2 = setTimeout(() => {
       setVisible(false)
       setOpening(false)
-    }, 950)
+    }, 560)
     timerRef.current = [t1, t2]
   }, [router])
 
