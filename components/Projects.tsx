@@ -13,6 +13,7 @@ type FanCard = {
   textColor: string
   left: number
   top: number
+  scale: number
   rotation: number
   zIndex: number
   slug: string | null
@@ -27,8 +28,9 @@ const cards: FanCard[] = [
     summary: 'An AI-assisted learning system that lowers language anxiety and helps international students participate with confidence.',
     artClass: 'art-blue',
     textColor: '#fff',
-    left: 70,
-    top: 36,
+    left: 90,
+    top: 18,
+    scale: 1.08,
     rotation: -7,
     zIndex: 1,
     slug: 'ai-canvas',
@@ -41,8 +43,9 @@ const cards: FanCard[] = [
     summary: 'A cross-media care ecosystem for mothers, connecting spatial installations with a companion app.',
     artClass: 'art-purple',
     textColor: '#fff',
-    left: 250,
-    top: 50,
+    left: 665,
+    top: 108,
+    scale: 0.94,
     rotation: -2,
     zIndex: 2,
     slug: 'mapmima',
@@ -55,8 +58,9 @@ const cards: FanCard[] = [
     summary: 'A strategic service proposal that uses ambient AI, AR memory, and community loyalty to restore the third place.',
     artClass: 'art-green',
     textColor: '#fff',
-    left: 470,
-    top: 36,
+    left: 270,
+    top: 226,
+    scale: 1.02,
     rotation: 4,
     zIndex: 3,
     slug: 'starbucks-echo',
@@ -69,8 +73,9 @@ const cards: FanCard[] = [
     summary: 'A food discovery experience created through a focused design sprint, from research to prototype testing.',
     artClass: 'art-orange',
     textColor: '#0a0a0a',
-    left: 690,
-    top: 54,
+    left: 790,
+    top: 354,
+    scale: 0.9,
     rotation: -3,
     zIndex: 4,
     slug: null,
@@ -83,8 +88,9 @@ const cards: FanCard[] = [
     summary: 'A product management case study around lifestyle-platform strategy, feature definition, and iteration.',
     artClass: 'art-pink',
     textColor: '#0a0a0a',
-    left: 910,
-    top: 36,
+    left: 135,
+    top: 482,
+    scale: 0.96,
     rotation: 6,
     zIndex: 5,
     slug: null,
@@ -124,16 +130,22 @@ export default function Projects() {
         {/* ── Fan layout — desktop ── */}
         <div
           className="relative hidden lg:block"
-          style={{ height: '560px', marginTop: '34px' }}
-          onMouseLeave={() => setHovered(null)}
+          style={{ height: '850px', marginTop: '34px' }}
         >
           {cards.map((c) => {
             const isHovered = hovered === c.name
             const hasHover = hovered !== null
             const isDimmed = hasHover && !isHovered
-            const detailOnLeft = c.left > 620
-            const detailX = detailOnLeft ? -338 : 248
-            const hoverLift = detailOnLeft ? -130 : -80
+            const baseWidth = 232 * c.scale
+            const baseHeight = 332 * c.scale
+            const hoverWidth = baseWidth + 42
+            const hoverHeight = baseHeight + 56
+            const detailOnLeft = c.left > 560
+            const detailWidth = 350
+            const detailX = detailOnLeft ? -(detailWidth + 52) : hoverWidth + 86
+            const coverX = detailOnLeft ? 0 : 0
+            const detailCardX = detailOnLeft ? detailWidth + 64 : 0
+            const hoverLift = detailOnLeft ? -(detailWidth + 18) : -28
 
             return (
               <div
@@ -143,23 +155,21 @@ export default function Projects() {
                   left: c.left,
                   top: c.top,
                   zIndex: isHovered ? 20 : c.zIndex,
-                  width: 620,
-                  height: 430,
+                  width: 790,
+                  height: 470,
                   transform: isHovered ? `translateX(${hoverLift}px)` : 'translateX(0)',
                   opacity: isDimmed ? 0 : 1,
                   pointerEvents: isDimmed ? 'none' : 'auto',
                   transition:
                     'opacity 0.28s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1)',
                 }}
-                onMouseEnter={() => setHovered(c.name)}
-                onClick={() => handleClick(c)}
               >
                 <div
                   className="absolute top-0"
                   style={{
                     left: detailOnLeft ? 0 : detailX,
-                    width: 320,
-                    height: 332,
+                    width: detailWidth,
+                    height: Math.max(332, baseHeight),
                     transform: isHovered
                       ? 'translateX(0) rotate(0deg)'
                       : `translateX(${detailOnLeft ? 96 : -96}px) rotate(${detailOnLeft ? 4 : -4}deg)`,
@@ -170,7 +180,7 @@ export default function Projects() {
                     pointerEvents: 'none',
                   }}
                 >
-                  <div className="h-full border-2 border-[#0a0a0a] bg-white px-7 py-6 shadow-[10px_10px_0_#0a0a0a]">
+                  <div className="h-full border-2 border-[#0a0a0a] bg-white px-9 py-7 shadow-[10px_10px_0_#0a0a0a]">
                     <div className="lab flex items-center justify-between text-[10px] text-gray-400">
                       <span>{c.year}</span>
                       <span>{c.slug ? 'Case Study' : 'Coming Soon'}</span>
@@ -184,7 +194,7 @@ export default function Projects() {
                     <p className="mt-7 text-[15px] leading-6 text-gray-600">
                       {c.summary}
                     </p>
-                    <p className="lab absolute bottom-6 left-7 text-[11px] text-[#0a0a0a]">
+                    <p className="lab absolute bottom-7 left-9 text-[11px] text-[#0a0a0a]">
                       {c.slug ? 'Click to open' : 'Details soon'}
                     </p>
                   </div>
@@ -193,9 +203,9 @@ export default function Projects() {
                 <div
                   className={`${c.artClass} absolute top-0 overflow-hidden`}
                   style={{
-                    left: detailOnLeft ? 336 : 0,
-                    width: isHovered ? 268 : 232,
-                    height: isHovered ? 382 : 332,
+                    left: isHovered ? detailCardX : coverX,
+                    width: isHovered ? hoverWidth : baseWidth,
+                    height: isHovered ? hoverHeight : baseHeight,
                     transform: `rotate(${isHovered ? 0 : c.rotation}deg) scale(${isHovered ? 1.06 : 1})`,
                     boxShadow: isHovered
                       ? '0 30px 70px rgba(0,0,0,0.34)'
@@ -204,7 +214,11 @@ export default function Projects() {
                       'left 0.55s cubic-bezier(0.22,1,0.36,1), width 0.55s cubic-bezier(0.22,1,0.36,1), height 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease',
                     cursor: c.slug ? 'pointer' : 'default',
                     zIndex: 2,
+                    pointerEvents: 'auto',
                   }}
+                  onMouseEnter={() => setHovered(c.name)}
+                  onMouseLeave={() => setHovered(null)}
+                  onClick={() => handleClick(c)}
                 >
                   <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 pt-5">
                     <span className="lab text-[11px]" style={{ color: c.textColor, opacity: 0.82 }}>
@@ -215,17 +229,17 @@ export default function Projects() {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <span
-                      className="block font-flex ultra-wide leading-[0.88]"
+                    <h3
+                      className="font-flex ultra-wide m-0 max-w-full whitespace-normal break-words leading-[0.88]"
                       style={{
                         color: c.textColor,
-                        fontSize: isHovered ? '48px' : '34px',
+                        fontSize: isHovered ? `${Math.max(38, 44 * c.scale)}px` : `${Math.max(28, 32 * c.scale)}px`,
                         mixBlendMode: c.textColor === '#fff' ? 'difference' : 'normal',
                         transition: 'font-size 0.35s ease',
                       }}
                     >
                       {c.name}
-                    </span>
+                    </h3>
                     <span
                       className="lab mt-4 block"
                       style={{
